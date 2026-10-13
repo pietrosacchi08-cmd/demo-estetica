@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estetica Beauty Care — Prenotazione Diretta</title>
+  <style>
+    :root {
+      --bg: #faf7f2;
+      --card-bg: #ffffff;
+      --accent: #25d366;
+      --gold: #b89753;
+      --gold-light: #f4ede0;
+      --text-main: #2d2926;
+      --text-muted: #78716c;
+      --border: rgba(184, 151, 83, 0.2);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      display: flex;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .mobile-frame {
+      width: 100%;
+      max-width: 480px;
+      background: var(--bg);
+      padding: 16px;
+      padding-bottom: 100px;
+    }
+
+    /* Trust Header */
+    .trust-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: #654d14;
+      background: var(--gold-light);
+      padding: 8px 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    /* Hero Banner Stile Spa */
+    .hero-banner {
+      width: 100%;
+      height: 180px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .hero-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(45,41,38,0.7) 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 16px;
+      color: #ffffff;
+    }
+
+    .hero-subtitle {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #f3e5c8;
+      font-weight: 700;
+    }
+
+    .hero-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .salon-meta {
+      display: flex;
+      justify-content: space-around;
+      background: #ffffff;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+
+    /* Filters */
+    .filters {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      scrollbar-width: none;
+    }
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filter-btn {
+      background: #ffffff;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .filter-btn.active {
+      background: var(--gold);
+      color: #ffffff;
+      font-weight: 600;
+      border-color: var(--gold);
+    }
+
+    .section-title {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* Cards */
+    .service-card {
+      background: var(--card-bg);
+      border-radius: 14px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-card.hidden { display: none; }
+
+    .service-img {
+      width: 100%;
+      height: 130px;
+      object-fit: cover;
+    }
+
+    .service-body {
+      padding: 14px;
+    }
+
+    .service-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 6px;
+    }
+
+    .service-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .service-price {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .service-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+
+    .service-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid #f5f2eb;
+      padding-top: 8px;
+    }
+
+    .tag-badge {
+      background: var(--gold-light);
+      color: #8c6a23;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+    }
+
+    /* Testimonial Box */
+    .testimonial {
+      background: #ffffff;
+      border-left: 3px solid var(--gold);
+      padding: 14px;
+      border-radius: 0 12px 12px 0;
+      margin: 20px 0;
+      font-size: 13px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+      border-top: 1px solid var(--border);
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .testimonial p {
+      font-style: italic;
+      color: #44403c;
+      margin-bottom: 6px;
+    }
+
+    .testimonial-author {
+      font-size: 11px;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    /* Accordion FAQ */
+    .faq-container { margin-top: 12px; }
+
+    .faq-item {
+      background: var(--card-bg);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 8px;
+      font-size: 13px;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .faq-question {
+      font-weight: 600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, margin-top 0.3s ease;
+      color: var(--text-muted);
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 100px;
+      margin-top: 8px;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+
+    .faq-icon {
+      transition: transform 0.2s ease;
+      font-size: 16px;
+      color: var(--gold);
+    }
+
+    .site-footer {
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 24px;
+      padding-bottom: 20px;
+    }
+
+    /* Sticky CTA */
+    .cta-fixed {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(250, 247, 242, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+    }
+
+    .whatsapp-btn {
+      width: 100%;
+      max-width: 440px;
+      background-color: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 15px;
+      padding: 14px;
+      border-radius: 10px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="mobile-frame">
+    <!-- Trust Header -->
+    <div class="trust-bar">
+      <span>⭐ 4.9 Google Reviews (81+)</span>
+      <span>🟢 Aperto Ora</span>
+    </div>
+
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80" alt="Estetica Beauty Care Spa">
+      <div class="hero-overlay">
+        <span class="hero-subtitle">Centro Estetico d'Eccellenza</span>
+        <h1 class="hero-title">Estetica Beauty Care</h1>
+      </div>
+    </div>
+
+    <div class="salon-meta">
+      <span>🕒 Mar-Sab 09-19</span>
+      <span>⚡ WhatsApp 1-Tap</span>
+      <span>🏆 Trattamenti Avanzati</span>
+    </div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <button class="filter-btn active" data-category="all">Tutti</button>
+      <button class="filter-btn" data-category="tshape">T-Shape</button>
+      <button class="filter-btn" data-category="corpo">Corpo & SPA</button>
+      <button class="filter-btn" data-category="viso">Viso & Skeyndor</button>
+    </div>
+
+    <div class="section-title">Listino Trattamenti di Punta</div>
+
+    <!-- Service 1: T-Shape -->
+    <div class="service-card" data-category="tshape">
+      <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=600&q=80" class="service-img" alt="Trattamento T-Shape">
+      <div class="service-body">
+        <div class="service-top">
+          <span class="service-name">Trattamento T-Shape Avanzato</span>
+          <span class="service-price">€85</span>
+        </div>
+        <p class="service-desc">Rimodellamento corpo e tonificazione profonda. Risultati visibili fin dalla prima seduta.</p>
+        <div class="service-footer">
+          <span>⏱️ 50 minuti</span>
+          <span class="tag-badge">Più Richiesto</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 2: Massaggio Drenante -->
+    <div class="service-card" data-category="corpo">
+      <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=600&q=80" class="service-img" alt="Massaggio Linfodrenante">
+      <div class="service-body">
+        <div class="service-top">
+          <span class="service-name">Massaggio Linfodrenante Rilassante</span>
+          <span class="service-price">€70</span>
+        </div>
+        <p class="service-desc">Tecnica drenante intensiva in un'atmosfera profondamente rilassante e defaticante.</p>
+        <div class="service-footer">
+          <span>⏱️ 60 minuti</span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 3: Skeyndor Viso -->
+    <div class="service-card" data-category="viso">
+      <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" class="service-img" alt="Skeyndor Viso">
+      <div class="service-body">
+        <div class="service-top">
+          <span class="service-name">Viso Skeyndor Power Hyaluronic</span>
+          <span class="service-price">€75</span>
+        </div>
+        <p class="service-desc">Trattamento idratante intensivo con acido ialuronico e booster ad alta concentrazione.</p>
+        <div class="service-footer">
+          <span>⏱️ 50 minuti</span>
+          <span class="tag-badge">Linea Esclusiva</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Testimonial -->
+    <div class="testimonial">
+      <p>“Il trattamento T-Shape mi ha dato risultati visibili fin da subito e il massaggio linfodrenante crea un'atmosfera davvero rilassante! Prenotare via WhatsApp è stato facilissimo.”</p>
+      <div class="testimonial-author">Sara M. — ⭐⭐⭐⭐⭐ (Cliente Google)</div>
+    </div>
+
+    <!-- FAQ Accordion -->
+    <div class="section-title" style="margin-top:24px;">Domande Frequenti</div>
+    <div class="faq-container">
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>Come funziona la prenotazione su WhatsApp?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Cliccando sul tasto in basso invii un messaggio diretto alla nostra reception per verificare gli orari e confermare l'appuntamento in 1 tap.
+        </div>
+      </div>
+
+      <div class="faq-item" onclick="toggleFaq(this)">
+        <div class="faq-question">
+          <span>È necessario versare un acconto?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          No, nessun acconto online. Pagherai direttamente in istituto al termine del tuo trattamento.
+        </div>
+      </div>
+    </div>
+
+    <div class="site-footer">
+      Estetica Beauty Care — P.IVA 09876543210<br>Tutti i diritti riservati
+    </div>
+  </div>
+
+  <div class="cta-fixed">
+    <a href="https://wa.me/393000000000?text=Ciao!%20Vorrei%20informazioni%20e%20prenotare%20un%20trattamento." class="whatsapp-btn" target="_blank">
+      💬 Prenota con WhatsApp (1-Tap)
+    </a>
+  </div>
+
+  <script>
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const serviceCards = document.querySelectorAll('.service-card');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        const category = btn.getAttribute('data-category');
+
+        serviceCards.forEach(card => {
+          if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.classList.remove('hidden');
+          } else {
+            card.classList.add('hidden');
+          }
+        });
+      });
+    });
+
+    function toggleFaq(element) {
+      element.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
