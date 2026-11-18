@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>IL TUO CENTRO — Live Demo Funnel Estetica 1-Tap</title>
+  <title>IL TUO CENTRO — Estetica Avanzata & Rimodellamento</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -166,7 +166,7 @@
         <!-- CONTENUTO E METRICHE COMPATTATI IN BASSO -->
         <div 
           id="hero-expanded-content" 
-          class="absolute inset-x-0 bottom-0 z-30 flex flex-col justify-end px-5 pb-20 pt-6 sm:p-12 md:p-14 max-w-5xl mx-auto opacity-0 translate-y-8 pointer-events-none"
+          class="absolute inset-x-0 bottom-0 z-30 flex flex-col justify-end px-5 pb-8 pt-6 sm:p-12 md:p-14 max-w-5xl mx-auto opacity-0 translate-y-8 pointer-events-none"
         >
           <!-- Etichetta DOPO 1ª SEDUTA posizionata in basso sopra le pillole dati -->
           <div class="mb-2">
@@ -464,20 +464,23 @@
   </section>
 
   <!-- =====================================================================
-       FOOTER WHITE-LABEL MINIMALE
+       FOOTER ISTITUZIONALE WHITE-LABEL MINIMALE
        ===================================================================== -->
   <footer class="border-t border-champagne/40 pt-12 pb-28 md:pb-12 px-5 sm:px-10 text-center text-xs text-[#3F3F46] max-w-6xl mx-auto">
     <p class="font-serif text-lg font-bold text-[#18181B] mb-1">IL TUO CENTRO — ESTETICA AVANZATA</p>
     <p class="mb-4 font-medium">Ricevimento su appuntamento • Consulenza personalizzata in cabina</p>
     <p class="text-[11px] text-[#3F3F46]/80">
-      Demo White-Label mobile-first ad alta conversione • Personalizzabile sul tuo brand in 24 ore.
+      Tutti i protocolli sono preceduti da diagnosi cutanea personalizzata • Trattamenti su appuntamento
     </p>
   </footer>
 
   <!-- =====================================================================
-       BARRA STICKY IN BASSO PER MOBILE (Sempre accessibile, 1-Tap)
+       BARRA STICKY IN BASSO PER MOBILE (Compare solo dopo la sezione hero)
        ===================================================================== -->
-  <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-ivory/95 backdrop-blur-lg border-t border-obsidian/10 px-4 py-3 shadow-[0_-8px_25px_rgba(0,0,0,0.08)]">
+  <div 
+    id="mobile-sticky-bar" 
+    class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-ivory/95 backdrop-blur-lg border-t border-obsidian/10 px-4 py-3 shadow-[0_-8px_25px_rgba(0,0,0,0.08)] transition-all duration-300 ease-out opacity-0 pointer-events-none translate-y-full"
+  >
     <a 
       id="wa-mobile-sticky"
       href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20prenotare%20una%20consulenza%20estetica%20presso%20IL%20TUO%20CENTRO."
@@ -543,7 +546,7 @@
       }
     }
 
-    // 2. Motore Scrollytelling Prima/Dopo a 60fps (100% Scroll Verticale, Zero Frecce)
+    // 2. Motore Scrollytelling Prima/Dopo a 60fps + Gestione Barra Sticky Mobile
     (function initVerticalScrollytelling() {
       const heroSection = document.getElementById('scrolly-hero');
       const heroFrame = document.getElementById('hero-frame');
@@ -555,6 +558,7 @@
       const introHeader = document.getElementById('hero-intro-header');
       const expandedContent = document.getElementById('hero-expanded-content');
       const scrollIndicator = document.getElementById('scroll-indicator');
+      const mobileStickyBar = document.getElementById('mobile-sticky-bar');
 
       if (!heroSection || !heroFrame || !afterLayer || !splitLine) return;
 
@@ -628,6 +632,18 @@
           const revealProgress = Math.max(0, (progress - 0.55) / 0.45);
           expandedContent.style.opacity = revealProgress;
           expandedContent.style.transform = `translateY(${(1 - revealProgress) * 26}px)`;
+        }
+
+        // Mostra la barra sticky mobile SOLO dopo aver superato la sezione hero (evita doppia CTA)
+        if (mobileStickyBar) {
+          const pastHero = rect.bottom <= window.innerHeight * 0.85;
+          if (pastHero) {
+            mobileStickyBar.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-full');
+            mobileStickyBar.classList.add('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          } else {
+            mobileStickyBar.classList.add('opacity-0', 'pointer-events-none', 'translate-y-full');
+            mobileStickyBar.classList.remove('opacity-100', 'pointer-events-auto', 'translate-y-0');
+          }
         }
 
         ticking = false;
