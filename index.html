@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aurelia Medical Aesthetics Milano — Demo Scrollytelling & 1-Tap WhatsApp</title>
+  <title>IL TUO CENTRO — Live Demo Funnel Estetica 1-Tap</title>
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -39,7 +39,6 @@
   </script>
 
   <style>
-    /* Stili custom per fluidità hardware-accelerated a 60fps dello scrollytelling */
     body {
       background-color: #FAF8F5;
       color: #18181B;
@@ -52,7 +51,7 @@
       transform: translateZ(0);
     }
 
-    .hero-image {
+    .hero-img {
       will-change: transform, filter;
       transform: translateZ(0);
     }
@@ -61,29 +60,44 @@
       will-change: opacity, transform;
     }
 
-    /* Animazione leggera per l'indicatore di scroll */
-    @keyframes floatScroll {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(6px); }
+    /* Layer DOPO rivelato esclusivamente dallo scroll verticale */
+    #after-layer {
+      will-change: clip-path;
+      clip-path: inset(0 100% 0 0);
     }
-    .animate-scroll-hint {
-      animation: floatScroll 2s ease-in-out infinite;
+
+    /* Sottile lama di luce oro champagne (nessuna freccia, nessuna maniglia) */
+    #split-line {
+      will-change: left, opacity;
+      left: 0%;
+    }
+
+    /* Animazione shimmer orizzontale al posto delle frecce dello scroll */
+    @keyframes shimmerSweep {
+      0% { transform: translateX(-120%); }
+      100% { transform: translateX(260%); }
+    }
+    .animate-shimmer-line {
+      animation: shimmerSweep 2.1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
     }
   </style>
 </head>
 <body class="font-sans selection:bg-champagne/30 selection:text-obsidian pb-24 md:pb-0">
 
-  <!-- BADGE TECNICO PER PIETRO (Spiega l'architettura al cliente/prospect) -->
+  <!-- =====================================================================
+       BADGE DEMO WHITE-LABEL IN ALTO (100% NEUTRO, ZERO BRAND INVENTATI)
+       ===================================================================== -->
   <div class="fixed top-3 left-1/2 -translate-x-1/2 z-50 w-[94%] max-w-xl">
-    <div class="bg-obsidian/90 backdrop-blur-md text-ivory px-3.5 py-2 rounded-full shadow-xl border border-champagne/30 flex items-center justify-between gap-2 text-xs">
+    <div class="bg-obsidian/92 backdrop-blur-md text-ivory px-3.5 py-2 rounded-full shadow-xl border border-champagne/35 flex items-center justify-between gap-2 text-xs">
       <div class="flex items-center gap-2 truncate">
         <span class="w-2 h-2 rounded-full bg-waBright animate-pulse shrink-0"></span>
-        <span class="font-semibold tracking-wider uppercase text-[10px] sm:text-xs text-champagne">Demo Scrollytelling + 1-Tap</span>
+        <span class="font-semibold tracking-wider uppercase text-[10px] sm:text-xs text-champagne">LIVE DEMO • FUNNEL ESTETICA 1-TAP</span>
       </div>
       <button 
+        type="button"
         onclick="toggleTechNote()" 
         class="bg-white/10 hover:bg-white/20 text-ivory px-2.5 py-1 rounded-full text-[11px] font-medium transition shrink-0 flex items-center gap-1.5 cursor-pointer"
-        aria-label="Perché funziona questa struttura"
+        aria-label="Perché converte questa struttura"
       >
         <i class="fa-solid fa-circle-info text-champagne"></i>
         <span>Perché converte</span>
@@ -91,29 +105,31 @@
     </div>
 
     <!-- Tooltip esplicativo espandibile -->
-    <div id="tech-note-box" class="hidden mt-2 bg-obsidian text-ivory p-4 rounded-2xl shadow-2xl border border-champagne/40 text-xs leading-relaxed transition-all">
+    <div id="tech-note-box" class="hidden mt-2 bg-obsidian text-ivory p-4 rounded-2xl shadow-2xl border border-champagne/40 text-xs leading-relaxed">
       <div class="flex justify-between items-start mb-1.5">
-        <span class="font-bold text-champagne uppercase tracking-wider text-[11px]">Architettura Anti-Attrito (Pietro)</span>
-        <button onclick="toggleTechNote()" class="text-ivory/60 hover:text-ivory p-1">
+        <span class="font-bold text-champagne uppercase tracking-wider text-[11px]">Architettura Anti-Attrito per Centri Estetici</span>
+        <button type="button" onclick="toggleTechNote()" class="text-ivory/60 hover:text-ivory p-1 cursor-pointer">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
       <p class="text-ivory/90">
-        <strong>1. Gancio Visivo (0-2 sec):</strong> L'espansione fluida allo scroll eleva subito lo status della clinica rispetto ai vecchi siti vetrina.<br>
-        <strong>2. Zero Moduli:</strong> Nessun form email lento. Ogni trattamento apre WhatsApp in 1-tap con messaggio già profilato, triplicando i contatti da smartphone.
+        <strong>1. Rivelazione Visiva allo Scroll (0-2 sec):</strong> Il passaggio fluido dal volto segnato al risultato luminoso cattura subito l'attenzione senza slider macchinosi.<br>
+        <strong>2. Zero Moduli & Zero Attese:</strong> Ogni trattamento apre WhatsApp in 1-tap con messaggio già profilato sull'obiettivo selezionato, moltiplicando le richieste da smartphone.
       </p>
     </div>
   </div>
 
-  <!-- HEADER MINIMALE D'ÉLITE -->
+  <!-- =====================================================================
+       HEADER MINIMALE WHITE-LABEL
+       ===================================================================== -->
   <header class="fixed top-14 left-0 right-0 z-40 px-5 sm:px-10 py-3 pointer-events-none">
     <div class="max-w-6xl mx-auto flex items-center justify-between">
-      <div class="pointer-events-auto bg-ivory/80 backdrop-blur-md px-4 py-2 rounded-full border border-obsidian/10 shadow-sm">
-        <span class="font-serif text-lg sm:text-xl font-bold tracking-tight text-obsidian">AURELIA</span>
-        <span class="text-[10px] uppercase tracking-[0.2em] text-champagneDark font-semibold ml-1.5 hidden sm:inline">Medical Aesthetics Milano</span>
+      <div class="pointer-events-auto bg-ivory/85 backdrop-blur-md px-4 py-2 rounded-full border border-obsidian/10 shadow-sm flex items-center gap-2">
+        <span class="font-serif text-lg sm:text-xl font-bold tracking-tight text-obsidian">IL TUO CENTRO</span>
+        <span class="text-[10px] uppercase tracking-[0.2em] text-champagneDark font-semibold hidden sm:inline">Estetica Avanzata</span>
       </div>
       <a 
-        href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20richiedere%20una%20consulenza%20riservata%20di%20medicina%20estetica."
+        href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20richiedere%20una%20consulenza%20estetica%20riservata%20presso%20IL%20TUO%20CENTRO."
         target="_blank"
         rel="noopener noreferrer"
         class="pointer-events-auto bg-obsidian hover:bg-obsidian/90 text-ivory px-4 py-2 rounded-full text-xs font-semibold flex items-center gap-2 shadow-md transition active:scale-95"
@@ -125,56 +141,96 @@
   </header>
 
   <!-- =====================================================================
-       SEZIONE 1: SCROLLYTELLING HERO (220vh di corsa fluida per l'espansione)
+       SEZIONE 1: HERO SCROLLYTELLING VERTICALE PURO (220vh, ZERO FRECCE)
        ===================================================================== -->
-  <section id="scrolly-hero" class="relative h-[210vh] w-full">
-    <!-- Contenitore Sticky ancorato al viewport -->
+  <section id="scrolly-hero" class="relative h-[220vh] w-full">
     <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
       
-      <!-- Testo Introduttivo sopra la cornice (sfuma mentre si scrolla) -->
+      <!-- Titolo Introduttivo Superiore -->
       <div id="hero-intro-header" class="hero-overlay-text text-center px-4 mb-5 z-20 max-w-2xl mt-16 sm:mt-12">
         <p class="text-[11px] sm:text-xs uppercase tracking-[0.28em] text-champagneDark font-semibold mb-2">
-          Medicina Estetica Rigenerativa • Milano
+          Estetica Rigenerativa & Rimodellamento
         </p>
         <h1 class="font-serif text-3xl sm:text-5xl md:text-6xl font-semibold text-obsidian leading-[1.08]">
-          L’armonia naturale, <br><span class="italic font-normal text-champagneDark">elevata a scienza.</span>
+          Dalle prime rughe alla luce, <br><span class="italic font-normal text-champagneDark">già dalla prima seduta.</span>
         </h1>
       </div>
 
-      <!-- Cornice Dinamica che si espande fino a Full-Screen allo scroll -->
+      <!-- Cornice Dinamica Prima/Dopo controllata al 100% dallo scroll verso il basso -->
       <div 
         id="hero-frame" 
-        class="hero-frame relative w-[86vw] sm:w-[70vw] md:w-[56vw] h-[48vh] sm:h-[54vh] rounded-[2rem] overflow-hidden shadow-2xl border border-champagne/30 z-10 flex items-center justify-center bg-obsidian"
+        class="hero-frame relative w-[88vw] sm:w-[70vw] md:w-[58vw] h-[50vh] sm:h-[56vh] rounded-[2rem] overflow-hidden shadow-2xl border border-champagne/40 z-10 select-none bg-obsidian"
       >
-        <!-- Immagine Editoriale di Lusso (Unsplash affidabile) -->
-        <img 
-          id="hero-image"
-          src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1600&q=85" 
-          onerror="this.src='https://placehold.co/1200x800/18181B/C5A059?text=Aurelia+Medical+Aesthetics'"
-          alt="Trattamento di medicina estetica avanzata a Milano" 
-          class="hero-image w-full h-full object-cover object-center scale-110 brightness-90"
-        />
-        
-        <!-- Gradiente leggero per garantire leggibilità totale -->
-        <div class="absolute inset-0 bg-gradient-to-t from-obsidian/85 via-obsidian/30 to-transparent"></div>
+        <!-- LAYER BASE: PRIMA (Primo piano stretto del solo volto adulto 40-50enne con prime rughe e grana cutanea naturale, senza mani o oggetti) -->
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
+          <img 
+            id="before-img"
+            src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=1400&q=85" 
+            onerror="this.src='https://placehold.co/1200x900/27272A/A1A1AA?text=PRIMA+%C2%B7+Segni+di+stanchezza+e+prime+rughe'"
+            alt="Primo piano stretto del solo volto di una donna adulta con segni di stanchezza, prime rughe d'espressione e pelle non levigata" 
+            class="hero-img w-full h-full object-cover object-[50%_22%] scale-[1.28] filter contrast-[1.18] saturate-[0.68] brightness-[0.88]"
+          />
+          <!-- Velatura leggera fredda per evidenziare incarnato spento e texture naturale -->
+          <div class="absolute inset-0 bg-slate-950/20"></div>
+          
+          <!-- Etichetta PRIMA -->
+          <div id="badge-before" class="absolute top-4 right-4 sm:top-6 sm:right-6 z-20 bg-obsidian/88 backdrop-blur-md border border-white/20 text-ivory/95 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-semibold uppercase tracking-[0.14em] shadow-lg transition-opacity duration-200">
+            PRIMA · Segni di stanchezza e prime rughe
+          </div>
+        </div>
 
-        <!-- Contenuto rivelato a piena espansione (appare man mano che si scrolla) -->
+        <!-- LAYER SUPERIORE: DOPO 1ª SEDUTA (Rivelato progressivamente scorrendo verso il basso) -->
+        <div id="after-layer" class="absolute inset-0 w-full h-full z-10 overflow-hidden">
+          <img 
+            id="after-img"
+            src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&w=1400&q=85" 
+            onerror="this.src='https://placehold.co/1200x900/F3EFEA/C5A059?text=DOPO+1a+SEDUTA+%C2%B7+Viso+disteso+e+luminoso'"
+            alt="Primo piano del volto luminoso, disteso e tonico dopo la prima seduta" 
+            class="hero-img w-full h-full object-cover object-[50%_24%] scale-[1.16] brightness-[1.06] saturate-[1.12] contrast-[1.03]"
+          />
+          
+          <!-- Etichetta DOPO 1ª SEDUTA -->
+          <div id="badge-after" class="absolute top-4 left-4 sm:top-6 sm:left-6 z-20 bg-champagne/95 backdrop-blur-md border border-white/40 text-obsidian px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-[0.14em] shadow-lg transition-opacity duration-200">
+            DOPO 1ª SEDUTA · Viso disteso e luminoso
+          </div>
+        </div>
+
+        <!-- SOTTILE LAMA DI LUCE ORO CHAMPAGNE (Zero frecce, zero slider trascinabili) -->
+        <div 
+          id="split-line" 
+          class="absolute top-0 bottom-0 w-[2px] bg-[#C5A059] shadow-[0_0_20px_rgba(197,160,89,1)] z-30 pointer-events-none"
+        ></div>
+
+        <!-- Gradiente inferiore per leggibilità totale a scorrimento completato -->
+        <div class="absolute inset-x-0 bottom-0 h-[66%] bg-gradient-to-t from-obsidian/95 via-obsidian/60 to-transparent z-20 pointer-events-none"></div>
+
+        <!-- CONTENUTO E METRICHE RIVELATI AL COMPLETAMENTO DELLO SCROLL -->
         <div 
           id="hero-expanded-content" 
-          class="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 md:p-16 max-w-5xl mx-auto opacity-0 translate-y-8 pointer-events-none"
+          class="absolute inset-0 z-30 flex flex-col justify-end p-6 sm:p-12 md:p-16 max-w-5xl mx-auto opacity-0 translate-y-8 pointer-events-none"
         >
-          <span class="inline-block w-fit bg-champagne/20 backdrop-blur-md border border-champagne/50 text-champagne px-3 py-1 rounded-full text-[11px] uppercase tracking-[0.2em] font-semibold mb-3">
-            Protocolli Su Misura • Zero Tempi Morti
-          </span>
-          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-ivory font-semibold leading-tight max-w-2xl mb-4">
-            Risultati clinici autentici, senza l’attesa di una segreteria.
+          <!-- Pillole Dati di Risultato -->
+          <div class="flex flex-wrap items-center gap-2 sm:gap-3 mb-4">
+            <span class="bg-champagne/25 backdrop-blur-md border border-champagne/60 text-champagne px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold tracking-wide">
+              +68% Luminosità Cutanea
+            </span>
+            <span class="bg-white/12 backdrop-blur-md border border-white/25 text-ivory px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide">
+              Effetto Lifting Immediato
+            </span>
+            <span class="bg-white/12 backdrop-blur-md border border-white/25 text-ivory px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide">
+              0 min Recupero
+            </span>
+          </div>
+
+          <h2 class="font-serif text-3xl sm:text-5xl md:text-6xl text-ivory font-semibold leading-tight max-w-2xl mb-3">
+            Pelle distesa e compatta, prenotazione in 1-Tap su WhatsApp.
           </h2>
           <p class="text-ivory/85 text-sm sm:text-base max-w-xl mb-6 leading-relaxed">
-            Dimentica i moduli di contatto infiniti o i centralini occupati. Seleziona il tuo obiettivo e dialoga direttamente con la nostra direzione medica su WhatsApp in un solo tap.
+            Nessun modulo infinito da compilare e nessuna telefonata a vuoto. Seleziona il tuo obiettivo e ricevi subito disponibilità e consulenza dedicata su WhatsApp.
           </p>
           <div class="flex flex-col sm:flex-row gap-3 pointer-events-auto">
             <a 
-              href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20prenotare%20una%20valutazione%20medica%20estetica%20riservata."
+              href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20prenotare%20una%20consulenza%20estetica%20presso%20IL%20TUO%20CENTRO."
               target="_blank"
               rel="noopener noreferrer"
               class="bg-waGreen hover:bg-[#0e7266] text-white px-6 py-4 rounded-2xl font-semibold text-sm sm:text-base flex items-center justify-center gap-3 shadow-xl transition active:scale-95"
@@ -192,11 +248,13 @@
         </div>
       </div>
 
-      <!-- Indicatore Visivo di Scroll in basso -->
-      <div id="scroll-indicator" class="mt-6 flex flex-col items-center gap-1.5 z-20 transition-opacity duration-300">
-        <span class="text-[11px] uppercase tracking-[0.22em] text-obsidian/70 font-semibold">Scorri per esplorare l'effetto</span>
-        <div class="w-6 h-9 rounded-full border border-obsidian/30 flex justify-center pt-1.5">
-          <div class="w-1 h-2 rounded-full bg-champagneDark animate-scroll-hint"></div>
+      <!-- INDICATORE SCORRIMENTO: BARRA LUMINOSA ORIZZONTALE SHIMMER (Zero frecce) -->
+      <div id="scroll-indicator" class="mt-6 flex flex-col items-center gap-2.5 z-20 transition-opacity duration-300">
+        <span class="text-[10px] sm:text-[11px] uppercase tracking-[0.24em] text-obsidian/80 font-semibold">
+          SCORRI VERSO IL BASSO PER RIVELARE IL RISULTATO
+        </span>
+        <div class="w-48 sm:w-56 h-[2px] bg-obsidian/15 rounded-full overflow-hidden relative">
+          <div class="w-2/5 h-full bg-gradient-to-r from-transparent via-[#C5A059] to-transparent animate-shimmer-line"></div>
         </div>
       </div>
 
@@ -204,16 +262,16 @@
   </section>
 
   <!-- =====================================================================
-       SEZIONE 2: I 3 PROTOCOLLI DI PUNTA CON CONVERSIONE DIRETTA 1-TAP
+       SEZIONE 2: PROTOCOLLI AD ALTA PRECISIONE (3 CARD CON 1-TAP WHATSAPP)
        ===================================================================== -->
   <section id="protocolli" class="py-16 sm:py-24 px-5 sm:px-10 max-w-6xl mx-auto">
     <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-16">
-      <span class="text-xs uppercase tracking-[0.25em] text-champagneDark font-bold">Eccellenza Clinica</span>
+      <span class="text-xs uppercase tracking-[0.25em] text-champagneDark font-bold">Eccellenza Estetica</span>
       <h2 class="font-serif text-3xl sm:text-5xl font-semibold text-obsidian mt-2 mb-4">
         Protocolli ad Alta Precisione
       </h2>
       <p class="text-obsidian/70 text-sm sm:text-base leading-relaxed">
-        Ogni trattamento inizia con una valutazione diagnostica dedicata. Clicca sul protocollo di tuo interesse per aprire subito la chat riservata con messaggio già pronto.
+        Ogni trattamento inizia con una valutazione diagnostica personalizzata. Tocca il protocollo di tuo interesse per aprire subito la chat riservata con messaggio già pronto.
       </p>
     </div>
 
@@ -225,7 +283,7 @@
           <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-alabaster">
             <img 
               src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=800&q=80" 
-              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Biorivitalizzazione'"
+              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Biorivitalizzazione+Avanzata'"
               alt="Biorivitalizzazione Avanzata" 
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
@@ -237,17 +295,17 @@
             Biorivitalizzazione Avanzata
           </h3>
           <p class="text-obsidian/70 text-sm leading-relaxed mb-6">
-            Complesso bio-attivo di acido ialuronico puro, polinucleotidi e peptidi biomimetici per restituire compattezza, luminosità e turgore profondo senza alterare i volumi.
+            Complesso bio-attivo di acido ialuronico puro e peptidi biomimetici per distendere le rughe sottili e restituire compattezza e luminosità senza alterare i lineamenti.
           </p>
         </div>
 
         <div class="pt-4 border-t border-obsidian/5">
           <div class="flex items-center justify-between text-xs text-obsidian/60 mb-4">
-            <span><i class="fa-regular fa-clock text-champagneDark mr-1"></i> 30 min • Zero recupero</span>
-            <span class="font-semibold text-obsidian">Da € 350</span>
+            <span><i class="fa-regular fa-clock text-champagneDark mr-1"></i> 35 min • Zero recupero</span>
+            <span class="font-semibold text-obsidian">Da € 180</span>
           </div>
           <a 
-            href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20informazioni%20e%20disponibilit%C3%A0%20per%20il%20protocollo%20di%20Biorivitalizzazione%20Avanzata."
+            href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20informazioni%20e%20disponibilit%C3%A0%20per%20il%20protocollo%20di%20Biorivitalizzazione%20Avanzata%20presso%20IL%20TUO%20CENTRO."
             target="_blank"
             rel="noopener noreferrer"
             class="w-full bg-waGreen hover:bg-[#0e7266] text-white py-3.5 px-4 rounded-2xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-95"
@@ -264,29 +322,29 @@
           <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-alabaster">
             <img 
               src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=800&q=80" 
-              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Laser+Medicale'"
+              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Laser+Medicale+di+Precisione'"
               alt="Laser Medicale di Precisione" 
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
             <span class="absolute top-3 left-3 bg-obsidian/80 backdrop-blur-md text-ivory text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">
-              Tecnologia Fotona / Pico
+              Texture & Uniformità
             </span>
           </div>
           <h3 class="font-serif text-2xl font-semibold text-obsidian mb-2">
             Laser Medicale di Precisione
           </h3>
           <p class="text-obsidian/70 text-sm leading-relaxed mb-6">
-            Resurfacing frazionato non ablativo e rimozione selettiva di discromie, macchie solari e lassità cutanea. Stimolazione del collagene endogeno ad altissima precisione.
+            Resurfacing delicato non ablativo per levigare la grana irregolare della pelle, attenuare discromie e stimolare nuovo collagene endogeno.
           </p>
         </div>
 
         <div class="pt-4 border-t border-obsidian/5">
           <div class="flex items-center justify-between text-xs text-obsidian/60 mb-4">
             <span><i class="fa-regular fa-clock text-champagneDark mr-1"></i> 40 min • Check-up incluso</span>
-            <span class="font-semibold text-obsidian">Da € 450</span>
+            <span class="font-semibold text-obsidian">Da € 240</span>
           </div>
           <a 
-            href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20prenotare%20una%20valutazione%20per%20il%20trattamento%20Laser%20Medicale%20di%20Precisione."
+            href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20prenotare%20una%20valutazione%20per%20il%20trattamento%20Laser%20Medicale%20di%20Precisione%20presso%20IL%20TUO%20CENTRO."
             target="_blank"
             rel="noopener noreferrer"
             class="w-full bg-waGreen hover:bg-[#0e7266] text-white py-3.5 px-4 rounded-2xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-95"
@@ -303,29 +361,29 @@
           <div class="relative h-48 rounded-2xl overflow-hidden mb-6 bg-alabaster">
             <img 
               src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" 
-              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Rimodellamento'"
+              onerror="this.src='https://placehold.co/600x400/F3EFEA/18181B?text=Rimodellamento+Non+Invasivo'"
               alt="Rimodellamento Non Invasivo" 
               class="w-full h-full object-cover group-hover:scale-105 transition duration-500"
             />
             <span class="absolute top-3 left-3 bg-obsidian/80 backdrop-blur-md text-ivory text-[10px] uppercase tracking-widest px-3 py-1 rounded-full font-semibold">
-              Body & Face Contouring
+              Lifting & Silhouette
             </span>
           </div>
           <h3 class="font-serif text-2xl font-semibold text-obsidian mb-2">
             Rimodellamento Non Invasivo
           </h3>
           <p class="text-obsidian/70 text-sm leading-relaxed mb-6">
-            Sinergia di ultrasuoni microfocalizzati e radiofrequenza medicale per ridefinire l’ovale del viso e tonificare i tessuti corporei senza bisturi né anestesia.
+            Sinergia di radiofrequenza multipolare e stimolazione profonda per ridefinire l'ovale del viso e tonificare i tessuti corporei senza bisturi.
           </p>
         </div>
 
         <div class="pt-4 border-t border-obsidian/5">
           <div class="flex items-center justify-between text-xs text-obsidian/60 mb-4">
             <span><i class="fa-regular fa-clock text-champagneDark mr-1"></i> 45 min • Effetto lifting</span>
-            <span class="font-semibold text-obsidian">Da € 550</span>
+            <span class="font-semibold text-obsidian">Da € 290</span>
           </div>
           <a 
-            href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20fissare%20una%20consulenza%20riservata%20per%20il%20Rimodellamento%20Non%20Invasivo."
+            href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20fissare%20una%20consulenza%20riservata%20per%20il%20Rimodellamento%20Non%20Invasivo%20presso%20IL%20TUO%20CENTRO."
             target="_blank"
             rel="noopener noreferrer"
             class="w-full bg-waGreen hover:bg-[#0e7266] text-white py-3.5 px-4 rounded-2xl font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md transition active:scale-95"
@@ -340,7 +398,7 @@
   </section>
 
   <!-- =====================================================================
-       SEZIONE 3: SELETTORE INTERATTIVO RAPIDO (1-TAP IN 3 SECONDI)
+       SEZIONE 3: SELETTORE INTERATTIVO RAPIDO (3 SECONDI -> 1-TAP WHATSAPP)
        ===================================================================== -->
   <section class="py-14 sm:py-20 px-5 sm:px-10">
     <div class="max-w-4xl mx-auto bg-obsidian text-ivory rounded-[2.25rem] p-6 sm:p-12 shadow-2xl border border-champagne/30 relative overflow-hidden">
@@ -356,30 +414,30 @@
           Scegli il tuo obiettivo e avvia la chat riservata in 3 secondi
         </h2>
         <p class="text-ivory/75 text-sm sm:text-base mb-8 max-w-2xl">
-          Seleziona l'area su cui desideri intervenire: il sistema prepara istantaneamente il messaggio per il nostro concierge medico su WhatsApp.
+          Seleziona l'area su cui desideri intervenire: il sistema prepara istantaneamente il messaggio per la reception su WhatsApp senza moduli da compilare.
         </p>
 
-        <!-- Pulsanti di selezione rapida -->
+        <!-- 4 Obiettivi Cliccabili -->
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8" id="goal-selector">
           <button 
             type="button"
-            onclick="selectGoal(this, 'Luminosità e Biorivitalizzazione Viso', 'Buongiorno Aurelia Milano, vorrei prenotare una consulenza per migliorare luminosità e compattezza del viso con Biorivitalizzazione Avanzata.')"
+            onclick="selectGoal(this, 'Buongiorno, vorrei prenotare una consulenza per distendere le prime rughe e ridare luminosità al viso con Biorivitalizzazione Avanzata presso IL TUO CENTRO.')"
             class="goal-btn active text-left p-4 rounded-2xl border border-champagne bg-champagne/15 transition flex items-center justify-between cursor-pointer"
           >
             <div>
-              <span class="block text-xs text-champagne uppercase tracking-wider font-semibold">Viso & Collo</span>
-              <span class="font-medium text-sm sm:text-base text-ivory">Luminosità & Biorivitalizzazione</span>
+              <span class="block text-xs text-champagne uppercase tracking-wider font-semibold">Viso & Prime Rughe</span>
+              <span class="font-medium text-sm sm:text-base text-ivory">Biorivitalizzazione Avanzata</span>
             </div>
             <i class="fa-solid fa-check-circle text-champagne text-lg"></i>
           </button>
 
           <button 
             type="button"
-            onclick="selectGoal(this, 'Rimozione Macchie e Laser Medicale', 'Buongiorno Aurelia Milano, vorrei valutare un protocollo Laser Medicale per uniformare la texture della pelle e trattare discromie.')"
+            onclick="selectGoal(this, 'Buongiorno, vorrei valutare un protocollo Laser Medicale di Precisione per levigare la grana della pelle e trattare discromie presso IL TUO CENTRO.')"
             class="goal-btn text-left p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex items-center justify-between cursor-pointer"
           >
             <div>
-              <span class="block text-xs text-ivory/50 uppercase tracking-wider font-semibold">Texture & Discromie</span>
+              <span class="block text-xs text-ivory/50 uppercase tracking-wider font-semibold">Texture & Uniformità</span>
               <span class="font-medium text-sm sm:text-base text-ivory">Laser Medicale di Precisione</span>
             </div>
             <i class="fa-regular fa-circle text-white/30 text-lg"></i>
@@ -387,11 +445,11 @@
 
           <button 
             type="button"
-            onclick="selectGoal(this, 'Lifting Non Chirurgico & Contorno Viso', 'Buongiorno Aurelia Milano, sono interessata a una valutazione per il Rimodellamento Non Invasivo dell’ovale del viso.')"
+            onclick="selectGoal(this, 'Buongiorno, sono interessata a una valutazione per il Rimodellamento Non Invasivo dell’ovale e dei tessuti presso IL TUO CENTRO.')"
             class="goal-btn text-left p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex items-center justify-between cursor-pointer"
           >
             <div>
-              <span class="block text-xs text-ivory/50 uppercase tracking-wider font-semibold">Tono & Volumi</span>
+              <span class="block text-xs text-ivory/50 uppercase tracking-wider font-semibold">Tono & Contorno Viso</span>
               <span class="font-medium text-sm sm:text-base text-ivory">Rimodellamento Non Invasivo</span>
             </div>
             <i class="fa-regular fa-circle text-white/30 text-lg"></i>
@@ -399,7 +457,7 @@
 
           <button 
             type="button"
-            onclick="selectGoal(this, 'Check-up Medico Diagnostico Completo', 'Buongiorno Aurelia Milano, vorrei fissare un primo check-up diagnostico in clinica per definire un piano personalizzato.')"
+            onclick="selectGoal(this, 'Buongiorno, vorrei fissare un check-up estetico diagnostico personalizzato presso IL TUO CENTRO.')"
             class="goal-btn text-left p-4 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition flex items-center justify-between cursor-pointer"
           >
             <div>
@@ -420,14 +478,14 @@
             <span class="text-champagne font-medium">1-Tap Direct</span>
           </div>
           <p id="wa-preview-text" class="text-sm text-ivory/95 italic bg-obsidian/60 p-3.5 rounded-xl border border-white/5">
-            "Buongiorno Aurelia Milano, vorrei prenotare una consulenza per migliorare luminosità e compattezza del viso con Biorivitalizzazione Avanzata."
+            "Buongiorno, vorrei prenotare una consulenza per distendere le prime rughe e ridare luminosità al viso con Biorivitalizzazione Avanzata presso IL TUO CENTRO."
           </p>
         </div>
 
         <!-- CTA 1-Tap Principale -->
         <a 
           id="wa-dynamic-cta"
-          href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20prenotare%20una%20consulenza%20per%20migliorare%20luminosit%C3%A0%20e%20compattezza%20del%20viso%20con%20Biorivitalizzazione%20Avanzata."
+          href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20prenotare%20una%20consulenza%20per%20distendere%20le%20prime%20rughe%20e%20ridare%20luminosit%C3%A0%20al%20viso%20con%20Biorivitalizzazione%20Avanzata%20presso%20IL%20TUO%20CENTRO."
           target="_blank"
           rel="noopener noreferrer"
           class="w-full bg-waBright hover:bg-[#20bd5a] text-obsidian font-bold py-4 px-6 rounded-2xl text-sm sm:text-base flex items-center justify-center gap-3 shadow-xl transition active:scale-95"
@@ -440,29 +498,29 @@
   </section>
 
   <!-- =====================================================================
-       FOOTER MINIMALE CON POSIZIONAMENTO & DATI LEGALI
+       FOOTER WHITE-LABEL MINIMALE
        ===================================================================== -->
   <footer class="border-t border-obsidian/10 py-12 px-5 sm:px-10 text-center text-xs text-obsidian/60 max-w-6xl mx-auto">
-    <p class="font-serif text-lg font-bold text-obsidian mb-1">AURELIA MEDICAL AESTHETICS MILANO</p>
-    <p class="mb-4">Via Montenapoleone / Quadrilatero • Milano • Ricevimento esclusivamente su appuntamento</p>
+    <p class="font-serif text-lg font-bold text-obsidian mb-1">IL TUO CENTRO — ESTETICA AVANZATA</p>
+    <p class="mb-4">Ricevimento su appuntamento • Consulenza personalizzata in cabina</p>
     <p class="text-[11px] text-obsidian/45">
-      Demo Architetturale sviluppata per dimostrazione di conversione mobile-first ad alto posizionamento.
+      Demo White-Label mobile-first ad alta conversione • Personalizzabile sul tuo brand in 24 ore.
     </p>
   </footer>
 
   <!-- =====================================================================
-       BARRA STICKY IN BASSO PER MOBILE (Sempre accessibile, zero intrusione)
+       BARRA STICKY IN BASSO PER MOBILE (Sempre accessibile, 1-Tap)
        ===================================================================== -->
   <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden bg-ivory/95 backdrop-blur-lg border-t border-obsidian/10 px-4 py-3 shadow-[0_-8px_25px_rgba(0,0,0,0.08)]">
     <a 
       id="wa-mobile-sticky"
-      href="https://wa.me/390000000000?text=Buongiorno%20Aurelia%20Milano%2C%20vorrei%20prenotare%20una%20consulenza%20riservata%20di%20medicina%20estetica."
+      href="https://wa.me/390000000000?text=Buongiorno%2C%20vorrei%20prenotare%20una%20consulenza%20estetica%20presso%20IL%20TUO%20CENTRO."
       target="_blank"
       rel="noopener noreferrer"
       class="w-full bg-waGreen active:bg-[#0e7266] text-white py-3.5 px-5 rounded-2xl font-semibold text-sm flex items-center justify-center gap-2.5 shadow-lg"
     >
       <i class="fa-brands fa-whatsapp text-xl text-waBright"></i>
-      <span>Parla con la Clinica su WhatsApp (1-Tap)</span>
+      <span>Prenota su WhatsApp (1-Tap)</span>
     </a>
   </div>
 
@@ -470,7 +528,7 @@
        MOTORE JAVASCRIPT: SCROLLYTELLING 60FPS + SELETTORE DINAMICO 1-TAP
        ===================================================================== -->
   <script>
-    // 1. Toggle Tooltip Tecnico per Pietro
+    // 1. Toggle Box Esplicativo "Perché converte"
     function toggleTechNote() {
       const box = document.getElementById('tech-note-box');
       if (box) {
@@ -478,10 +536,9 @@
       }
     }
 
-    // 2. Selettore Interattivo Obiettivo -> Aggiorna anteprima e link WhatsApp 1-Tap
-    function selectGoal(btnElement, label, messageText) {
+    // 2. Selettore Obiettivo 3 Secondi -> Aggiorna anteprima e link WhatsApp 1-Tap
+    function selectGoal(btnElement, messageText) {
       try {
-        // Reset stile di tutti i bottoni
         const allBtns = document.querySelectorAll('.goal-btn');
         allBtns.forEach(btn => {
           btn.classList.remove('active', 'border-champagne', 'bg-champagne/15');
@@ -497,7 +554,6 @@
           }
         });
 
-        // Attiva bottone selezionato
         btnElement.classList.remove('border-white/15', 'bg-white/5');
         btnElement.classList.add('active', 'border-champagne', 'bg-champagne/15');
         const activeIcon = btnElement.querySelector('i');
@@ -510,13 +566,11 @@
           activeSub.classList.add('text-champagne');
         }
 
-        // Aggiorna testo anteprima
         const previewEl = document.getElementById('wa-preview-text');
         if (previewEl) {
           previewEl.textContent = `"${messageText}"`;
         }
 
-        // Aggiorna URL WhatsApp (sia nella card che nella barra sticky mobile)
         const encodedMsg = encodeURIComponent(messageText);
         const waUrl = `https://wa.me/390000000000?text=${encodedMsg}`;
         
@@ -531,36 +585,55 @@
       }
     }
 
-    // 3. Motore Scrollytelling Fluido a 60fps (Hardware Accelerated)
-    (function initScrollytelling() {
+    // 3. Motore Scrollytelling Prima/Dopo a 60fps (100% Scroll Verticale, Zero Frecce)
+    (function initVerticalScrollytelling() {
       const heroSection = document.getElementById('scrolly-hero');
       const heroFrame = document.getElementById('hero-frame');
-      const heroImage = document.getElementById('hero-image');
+      const beforeImg = document.getElementById('before-img');
+      const afterImg = document.getElementById('after-img');
+      const afterLayer = document.getElementById('after-layer');
+      const splitLine = document.getElementById('split-line');
+      const badgeBefore = document.getElementById('badge-before');
+      const badgeAfter = document.getElementById('badge-after');
       const introHeader = document.getElementById('hero-intro-header');
       const expandedContent = document.getElementById('hero-expanded-content');
       const scrollIndicator = document.getElementById('scroll-indicator');
 
-      if (!heroSection || !heroFrame) return;
+      if (!heroSection || !heroFrame || !afterLayer || !splitLine) return;
 
       let ticking = false;
+
+      function applyReveal(percent) {
+        const clamped = Math.max(0, Math.min(100, percent));
+        const rightInset = 100 - clamped;
+        afterLayer.style.clipPath = `inset(0 ${rightInset}% 0 0)`;
+        splitLine.style.left = `${clamped}%`;
+        splitLine.style.opacity = (clamped <= 1 || clamped >= 99) ? '0' : '1';
+
+        if (badgeAfter) {
+          badgeAfter.style.opacity = clamped < 18 ? '0' : '1';
+        }
+        if (badgeBefore) {
+          badgeBefore.style.opacity = clamped > 82 ? '0' : '1';
+        }
+      }
 
       function updateScrollAnimation() {
         const rect = heroSection.getBoundingClientRect();
         const totalScrollable = heroSection.offsetHeight - window.innerHeight;
         
-        // Calcolo progresso normalizzato tra 0 (inizio) e 1 (fine espansione)
         let progress = -rect.top / totalScrollable;
         progress = Math.max(0, Math.min(1, progress));
 
-        // Easing cubico morbido per sensazione cinematografica
+        // Easing cubico fluido
         const ease = 1 - Math.pow(1 - progress, 3);
 
         const isMobile = window.innerWidth < 768;
-        const startWidth = isMobile ? 86 : 58; // vw iniziale
-        const startHeight = isMobile ? 48 : 54; // vh iniziale
-        const startRadius = isMobile ? 28 : 36; // px iniziale
+        const startWidth = isMobile ? 88 : 58;
+        const startHeight = isMobile ? 50 : 56;
+        const startRadius = isMobile ? 28 : 36;
 
-        // Interpolazione dimensioni cornice fino a 100vw x 100vh
+        // Espansione cornice fino a full-screen
         const currentWidth = startWidth + (100 - startWidth) * ease;
         const currentHeight = startHeight + (100 - startHeight) * ease;
         const currentRadius = startRadius * (1 - ease);
@@ -569,31 +642,38 @@
         heroFrame.style.height = `${currentHeight}vh`;
         heroFrame.style.borderRadius = `${currentRadius}px`;
 
-        // Leggero zoom-out dell'immagine interna per profondità
-        if (heroImage) {
-          const imgScale = 1.12 - (0.12 * ease);
-          heroImage.style.transform = `scale(${imgScale})`;
+        // Zoom calibrato sul primo piano del volto (senza mai mostrare bordi esterni)
+        if (beforeImg) {
+          const beforeScale = 1.28 - (0.10 * ease);
+          beforeImg.style.transform = `scale(${beforeScale})`;
+        }
+        if (afterImg) {
+          const afterScale = 1.16 - (0.12 * ease);
+          afterImg.style.transform = `scale(${afterScale})`;
         }
 
-        // Dissolvenza in uscita del titolo superiore e dell'indicatore scroll
+        // Rivelazione progressiva Prima -> Dopo legata al 100% allo scroll verso il basso
+        applyReveal(progress * 100);
+
+        // Dissolvenza titolo superiore e barra luminosa shimmer
         if (introHeader) {
-          const introOpacity = Math.max(0, 1 - progress * 2.8);
+          const introOpacity = Math.max(0, 1 - progress * 3.2);
           introHeader.style.opacity = introOpacity;
           introHeader.style.transform = `translateY(${-progress * 40}px)`;
           introHeader.style.display = introOpacity <= 0.02 ? 'none' : 'block';
         }
 
         if (scrollIndicator) {
-          const indOpacity = Math.max(0, 1 - progress * 4);
+          const indOpacity = Math.max(0, 1 - progress * 4.5);
           scrollIndicator.style.opacity = indOpacity;
           scrollIndicator.style.display = indOpacity <= 0.02 ? 'none' : 'flex';
         }
 
-        // Comparsa fluida del posizionamento d'élite e CTA 1-Tap a cornice espansa
+        // Comparsa fluida metriche + CTA oltre il 55% di scroll
         if (expandedContent) {
-          const revealProgress = Math.max(0, (progress - 0.45) / 0.55);
+          const revealProgress = Math.max(0, (progress - 0.55) / 0.45);
           expandedContent.style.opacity = revealProgress;
-          expandedContent.style.transform = `translateY(${(1 - revealProgress) * 28}px)`;
+          expandedContent.style.transform = `translateY(${(1 - revealProgress) * 26}px)`;
         }
 
         ticking = false;
@@ -608,7 +688,7 @@
 
       window.addEventListener('resize', updateScrollAnimation, { passive: true });
       
-      // Esecuzione iniziale al caricamento
+      // Inizializzazione immediata al caricamento
       updateScrollAnimation();
     })();
   </script>
